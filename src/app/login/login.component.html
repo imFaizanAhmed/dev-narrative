@@ -1,0 +1,82 @@
+<div class="form">
+
+  <ul class="tab-group">
+    <li [class.active]="isSignup" class="tab"><a (click)="isSignup = true">Sign Up</a></li>
+    <li [class.active]="!isSignup" class="tab"><a (click)="isSignup = false">Log In</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div *ngIf="isSignup; else login">
+      <h1>Sign Up for Free</h1>
+
+      <form action="/" method="post">
+
+        <div class="top-row">
+          <div class="field-wrap">
+            <label [class.labelActive]="firstName !== ''">
+              First Name<span class="req">*</span>
+            </label>
+            <!-- (keyup)="firstNameChange($event)" -->
+            <input type="text" name="firstName" [(ngModel)]="firstName" required autocomplete="off" />
+          </div>
+
+          <div class="field-wrap">
+            <label [class.labelActive]="lastName !== ''">
+              Last Name<span class="req">*</span>
+            </label>
+            <input type="text" name="lastName" [(ngModel)]="lastName" required autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="field-wrap">
+          <label [class.labelActive]="emailAddress !== ''">
+            Email Address<span class="req">*</span>
+          </label>
+          <input type="email" name="emailAddress" [(ngModel)]="emailAddress" required autocomplete="off" />
+        </div>
+
+        <div class="field-wrap">
+          <label [class.labelActive]="password !== ''">
+            Set A Password<span class="req">*</span>
+          </label>
+          <input type="password" name="password" [(ngModel)]="password" required autocomplete="off" />
+        </div>
+
+        <button type="submit" class="button button-block">Get Started</button>
+
+      </form>
+
+    </div>
+
+    <ng-template #login>
+      <div>
+        <h1>Welcome Back!</h1>
+
+        <form action="/" method="post">
+
+          <div class="field-wrap">
+            <label [class.labelActive]="emailAddress !== ''">
+              Email Address<span class="req">*</span>
+            </label>
+            <input type="email" name="emailAddress" [(ngModel)]="emailAddress" required autocomplete="off" />
+          </div>
+
+          <div class="field-wrap">
+            <label [class.labelActive]="password !== ''">
+              Password<span class="req">*</span>
+            </label>
+            <input type="password" name="password" [(ngModel)]="password" required autocomplete="off" />
+          </div>
+
+          <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+          <button class="button button-block">Log In</button>
+
+        </form>
+
+      </div>
+    </ng-template>
+
+  </div><!-- tab-content -->
+
+</div> <!-- /form -->
