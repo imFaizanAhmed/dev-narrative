@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { GET_COMPANY } from 'src/app/graphql/company.graphql';
+import { LOG_IN } from 'src/app/graphql/user.graphql';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -22,12 +23,34 @@ export class LoginComponent {
     this.emailAddress = '';
     this.password = '';
 
-    this.http
-      .get('http://localhost:2000/users')
+    console.log('numu init');
+
+    // this.http
+    //   .get('http://localhost:2000/users')
+    //   .subscribe(({ data, error }: any) => {
+    //     console.log('data', data);
+    //   });
+    // this.getCompany();
+  }
+
+  // handleSignIn() {
+  //   this.apollo.query({
+  //     // query:
+  //   });
+  // }
+
+  handleLogin() {
+    this.apollo
+      .query({
+        query: LOG_IN,
+        variables: {
+          email: this.emailAddress,
+          password: this.password,
+        },
+      })
       .subscribe(({ data, error }: any) => {
-        console.log('data', data);
+        console.log('nuuuum data', data);
       });
-    this.getCompany();
   }
 
   getCompany() {
