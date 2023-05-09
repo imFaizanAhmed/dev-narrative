@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { GET_COMPANY } from 'src/app/graphql/company.graphql';
+import { LOG_IN } from 'src/app/graphql/user.graphql';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -21,25 +21,39 @@ export class LoginComponent {
     this.lastName = '';
     this.emailAddress = '';
     this.password = '';
-
-    this.http
-      .get('http://localhost:2000/users')
-      .subscribe(({ data, error }: any) => {
-        console.log('data', data);
-      });
-    this.getCompany();
   }
 
-  getCompany() {
+  // this.http
+  //   .get('http://localhost:2000/users')
+  //   .subscribe(({ data, error }: any) => {
+  //     console.log('data', data);
+  //   });
+  // this.getCompany();
+
+  handleLogin() {
     this.apollo
       .query({
-        query: GET_COMPANY,
+        query: LOG_IN,
         variables: {
-          id: '6446ac7b3c87dff530af6e60',
+          email: this.emailAddress,
+          password: this.password,
         },
       })
       .subscribe(({ data, error }: any) => {
         console.log('nuuuum data', data);
       });
   }
+
+  // getCompany() {
+  //   this.apollo
+  //     .query({
+  //       query: GET_COMPANY,
+  //       variables: {
+  //         id: '6446ac7b3c87dff530af6e60',
+  //       },
+  //     })
+  //     .subscribe(({ data, error }: any) => {
+  //       console.log('nuuuum data', data);
+  //     });
+  // }
 }
